@@ -1,0 +1,15 @@
+[project]
+name = "ai-gateway-mcp"
+version = "1.0.0"
+description = "Production-ready Multi-Provider AI Gateway MCP Server with intelligent routing and caching"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "black",
+    "flake8"
+]

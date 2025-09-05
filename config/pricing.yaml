@@ -1,0 +1,67 @@
+# Pricing information per provider and model
+pricing:
+  openai:
+    gpt-4-turbo:
+      input_cost_per_1k: 0.01
+      output_cost_per_1k: 0.03
+      request_cost: 0
+    gpt-3.5-turbo:
+      input_cost_per_1k: 0.0005
+      output_cost_per_1k: 0.0015
+      request_cost: 0
+    gpt-4-vision:
+      input_cost_per_1k: 0.01
+      output_cost_per_1k: 0.03
+      request_cost: 0
+      
+  anthropic:
+    claude-3-opus:
+      input_cost_per_1k: 0.015
+      output_cost_per_1k: 0.075
+      request_cost: 0
+    claude-3-sonnet:
+      input_cost_per_1k: 0.003
+      output_cost_per_1k: 0.015
+      request_cost: 0
+    claude-3-haiku:
+      input_cost_per_1k: 0.00025
+      output_cost_per_1k: 0.00125
+      request_cost: 0
+      
+  google:
+    gemini-pro:
+      input_cost_per_1k: 0.0005
+      output_cost_per_1k: 0.0015
+      request_cost: 0
+    gemini-pro-vision:
+      input_cost_per_1k: 0.0005
+      output_cost_per_1k: 0.0015
+      request_cost: 0
+      
+  mistral:
+    mistral-medium:
+      input_cost_per_1k: 0.0027
+      output_cost_per_1k: 0.0027
+      request_cost: 0
+    mistral-small:
+      input_cost_per_1k: 0.001
+      output_cost_per_1k: 0.001
+      request_cost: 0
+    mistral-large:
+      input_cost_per_1k: 0.008
+      output_cost_per_1k: 0.008
+      request_cost: 0
+      
+  groq:
+    mixtral-8x7b:
+      input_cost_per_1k: 0.00027
+      output_cost_per_1k: 0.00027
+      request_cost: 0
+    llama2-70b:
+      input_cost_per_1k: 0.0007
+      output_cost_per_1k: 0.0007
+      request_cost: 0
+    code-llama-34b:
+      input_cost_per_1k: 0.0005
+      output_cost_per_1k: 0.0005
+      request_cost: 0
