@@ -32,12 +32,16 @@ gcloud run deploy ${SERVICE_NAME} \
     --region=${REGION} \
     --project=${PROJECT} \
     --source=. \
+    --service-account="ai-gateway-service@${PROJECT}.iam.gserviceaccount.com" \
     --set-env-vars="GOOGLE_CLOUD_PROJECT=${PROJECT},GOOGLE_CLOUD_LOCATION=${REGION}" \
-    --cpu=1 \
-    --memory=512Mi \
+    --set-secrets="OPENAI_API_KEY=openai-api-key:latest,ANTHROPIC_API_KEY=anthropic-api-key:latest,GOOGLE_API_KEY=google-api-key:latest,XAI_API_KEY=xai-api-key:latest" \
+    --cpu=2 \
+    --memory=4Gi \
     --min-instances=0 \
     --max-instances=10 \
-    --labels=app=ai-gateway-mcp
+    --timeout=900 \
+    --concurrency=10 \
+    --labels=app=ai-gateway-mcp,version=v1
 
 # Get the service URL
 SERVICE_URL=$(gcloud run services describe ${SERVICE_NAME} \

@@ -5,15 +5,13 @@
 export GOOGLE_CLOUD_PROJECT="your-project-id"
 export GOOGLE_CLOUD_LOCATION="us-central1"
 
-# AI Provider API Keys
-export OPENAI_API_KEY="your-openai-key"
-export ANTHROPIC_API_KEY="your-anthropic-key"
-export GOOGLE_API_KEY="your-google-key"
-export MISTRAL_API_KEY="your-mistral-key"
-export GROQ_API_KEY="your-groq-key"
+# AI Provider API Keys - Replace with your actual keys
+export OPENAI_API_KEY="your-openai-api-key"
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+export GOOGLE_API_KEY="your-google-api-key"
+export XAI_API_KEY="your-xai-api-key"
 
 # Server Configuration
-export PORT=8080
 export USER_ID="default-user"
 
 # Cache Configuration

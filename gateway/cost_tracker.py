@@ -29,55 +29,73 @@ class CostOptimizer:
         self.cost_by_provider = {}
         
     def _initialize_cost_models(self) -> Dict[str, CostModel]:
-        """Initialize cost models for all providers"""
+        """Initialize cost models for 2025 providers"""
         return {
-            "gpt-4-turbo": CostModel(
+            # OpenAI 2025 Models (per 1M tokens)
+            "gpt-5": CostModel(
                 provider="openai",
-                model="gpt-4-turbo",
-                input_cost_per_1k=0.01,
-                output_cost_per_1k=0.03,
+                model="gpt-5",
+                input_cost_per_1k=3.0,  # $3 per 1M = $0.003 per 1K
+                output_cost_per_1k=15.0,  # $15 per 1M = $0.015 per 1K
                 request_cost=0
             ),
-            "gpt-3.5-turbo": CostModel(
+            "o3": CostModel(
                 provider="openai",
-                model="gpt-3.5-turbo",
-                input_cost_per_1k=0.0005,
-                output_cost_per_1k=0.0015,
+                model="o3",
+                input_cost_per_1k=15.0,  # $15 per 1M = $0.015 per 1K
+                output_cost_per_1k=60.0,  # $60 per 1M = $0.060 per 1K
                 request_cost=0
             ),
-            "claude-3-opus": CostModel(
+            "o4-mini": CostModel(
+                provider="openai",
+                model="o4-mini",
+                input_cost_per_1k=0.15,  # $0.15 per 1M = $0.00015 per 1K
+                output_cost_per_1k=0.60,  # $0.60 per 1M = $0.0006 per 1K
+                request_cost=0
+            ),
+            # Anthropic 2025 Models
+            "claude-opus-4.1": CostModel(
                 provider="anthropic",
-                model="claude-3-opus",
-                input_cost_per_1k=0.015,
-                output_cost_per_1k=0.075,
+                model="claude-opus-4.1",
+                input_cost_per_1k=15.0,  # $15 per 1M
+                output_cost_per_1k=75.0,  # $75 per 1M
                 request_cost=0
             ),
-            "claude-3-sonnet": CostModel(
+            "claude-sonnet-4": CostModel(
                 provider="anthropic",
-                model="claude-3-sonnet",
-                input_cost_per_1k=0.003,
-                output_cost_per_1k=0.015,
+                model="claude-sonnet-4",
+                input_cost_per_1k=3.0,  # $3 per 1M
+                output_cost_per_1k=15.0,  # $15 per 1M
                 request_cost=0
             ),
-            "gemini-pro": CostModel(
+            # Google 2025 Models
+            "gemini-2.5-pro": CostModel(
                 provider="google",
-                model="gemini-pro",
-                input_cost_per_1k=0.0005,
-                output_cost_per_1k=0.0015,
+                model="gemini-2.5-pro",
+                input_cost_per_1k=1.25,  # $1.25 per 1M
+                output_cost_per_1k=5.0,  # $5 per 1M
                 request_cost=0
             ),
-            "mistral-medium": CostModel(
-                provider="mistral",
-                model="mistral-medium",
-                input_cost_per_1k=0.0027,
-                output_cost_per_1k=0.0027,
+            "gemini-2.5-flash": CostModel(
+                provider="google",
+                model="gemini-2.5-flash",
+                input_cost_per_1k=0.075,  # $0.075 per 1M
+                output_cost_per_1k=0.30,  # $0.30 per 1M
                 request_cost=0
             ),
-            "mixtral-8x7b": CostModel(
-                provider="groq",
-                model="mixtral-8x7b",
-                input_cost_per_1k=0.00027,
-                output_cost_per_1k=0.00027,
+            # xAI 2025 Models
+            "grok-4": CostModel(
+                provider="xai",
+                model="grok-4",
+                input_cost_per_1k=5.0,  # $5 per 1M
+                output_cost_per_1k=15.0,  # $15 per 1M
+                request_cost=0
+            ),
+            "grok-4-heavy": CostModel(
+                provider="xai",
+                model="grok-4-heavy",
+                input_cost_per_1k=10.0,  # $10 per 1M
+                output_cost_per_1k=30.0,  # $30 per 1M
                 request_cost=0
             )
         }

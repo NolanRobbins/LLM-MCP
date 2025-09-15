@@ -11,7 +11,6 @@ import asyncio
 from dotenv import load_dotenv
 
 from fastmcp import FastMCP
-from fastmcp.server import Server
 from pydantic import BaseModel, Field
 
 # Import gateway modules
@@ -33,9 +32,7 @@ load_dotenv()
 
 # Initialize MCP server with metadata
 mcp = FastMCP(
-    "AI Gateway MCP Server",
-    version="1.0.0",
-    description="Enterprise-grade multi-provider AI gateway with intelligent routing, caching, and cost optimization"
+    "AI Gateway MCP Server"
 )
 
 # Initialize gateway components
@@ -79,7 +76,7 @@ def ai_gateway_prompt() -> str:
     4. Handle failover when providers are unavailable
     5. Optimize prompts for better results
     
-    Available providers: OpenAI, Anthropic, Google, Mistral, Groq
+    Available providers: OpenAI, Anthropic, Google, xAI Grok
     
     When users ask questions, use the unified_completion tool to get AI responses.
     You can specify requirements like 'low_latency', 'low_cost', or 'high_quality'.
@@ -91,7 +88,7 @@ async def unified_completion(
     model: str = "auto",
     max_tokens: int = 1000,
     temperature: float = 0.7,
-    requirements: Dict[str, Any] = None
+    requirements: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """
     Send a completion request through the AI Gateway with intelligent routing.
@@ -259,7 +256,7 @@ async def optimize_prompt(
     # Use a fast model for optimization
     response = await unified_completion(
         prompt=optimizer_prompt,
-        model="mistral-small",
+        model="o4-mini",
         max_tokens=500,
         temperature=0.3,
         requirements={"low_cost": True}
@@ -344,7 +341,8 @@ async def _failover_completion(prompt, max_tokens, temperature, requirements):
                 temperature=temperature,
                 requirements={**requirements, "failover_enabled": False}
             )
-        except:
+        except Exception as e:
+            logger.warning(f"Failover attempt with {provider} failed: {str(e)}")
             continue
     return {"error": "All providers failed"}
 
@@ -369,7 +367,7 @@ if __name__ == "__main__":
     
     # Start the server with production settings
     uvicorn.run(
-        mcp.get_app(),
+        mcp.http_app,
         host="0.0.0.0",
         port=port,
         log_level="info",

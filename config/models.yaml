@@ -1,78 +1,104 @@
-# Model configurations and capabilities
+# Model configurations and capabilities - 2025 Latest Models
 models:
-  gpt-4-turbo:
+  # OpenAI 2025 Models
+  gpt-5:
     provider: openai
     context_length: 128000
     supports_functions: true
     supports_vision: true
     supports_streaming: true
-    avg_latency_ms: 800
-    cost_per_1k_tokens: 0.03
-    quality_score: 0.95
-    specialties: ["reasoning", "creative", "analysis"]
-    
-  gpt-3.5-turbo:
+    avg_latency_ms: 750
+    cost_per_1m_tokens: 15.00
+    quality_score: 0.98
+    specialties: ["reasoning", "creative", "analysis", "math", "coding"]
+
+  o3:
     provider: openai
-    context_length: 16000
+    context_length: 128000
+    supports_functions: true
+    supports_vision: true
+    supports_streaming: true
+    avg_latency_ms: 1200
+    cost_per_1m_tokens: 20.00
+    quality_score: 0.99
+    specialties: ["reasoning", "complex-problem-solving", "math", "coding"]
+
+  o4-mini:
+    provider: openai
+    context_length: 128000
     supports_functions: true
     supports_vision: false
     supports_streaming: true
     avg_latency_ms: 400
-    cost_per_1k_tokens: 0.0015
-    quality_score: 0.85
-    specialties: ["code", "general"]
-    
-  claude-3-opus:
+    cost_per_1m_tokens: 5.00
+    quality_score: 0.91
+    specialties: ["reasoning", "cost-efficient", "fast-inference"]
+
+  # Anthropic 2025 Models
+  claude-opus-4.1:
     provider: anthropic
-    context_length: 200000
+    context_length: 1000000
     supports_functions: true
     supports_vision: true
     supports_streaming: true
     avg_latency_ms: 900
-    cost_per_1k_tokens: 0.03
-    quality_score: 0.96
-    specialties: ["code", "reasoning", "long-form"]
-    
-  claude-3-sonnet:
+    cost_per_1m_tokens: 75.00
+    quality_score: 0.97
+    specialties: ["code", "reasoning", "long-form", "agentic-tasks"]
+
+  claude-sonnet-4:
     provider: anthropic
-    context_length: 200000
+    context_length: 1000000
     supports_functions: true
     supports_vision: true
     supports_streaming: true
     avg_latency_ms: 600
-    cost_per_1k_tokens: 0.015
-    quality_score: 0.92
-    specialties: ["code", "reasoning"]
-    
-  gemini-pro:
+    cost_per_1m_tokens: 15.00
+    quality_score: 0.94
+    specialties: ["code", "reasoning", "balanced", "efficiency"]
+
+  # Google 2025 Models
+  gemini-2.5-pro:
     provider: google
-    context_length: 32000
+    context_length: 2000000
+    supports_functions: true
+    supports_vision: true
+    supports_streaming: true
+    avg_latency_ms: 800
+    cost_per_1m_tokens: 12.00
+    quality_score: 0.96
+    specialties: ["thinking", "long-context", "multimodal", "analysis"]
+
+  gemini-2.5-flash:
+    provider: google
+    context_length: 1000000
+    supports_functions: true
+    supports_vision: true
+    supports_streaming: true
+    avg_latency_ms: 500
+    cost_per_1m_tokens: 3.00
+    quality_score: 0.92
+    specialties: ["price-performance", "thinking", "agentic", "speed"]
+
+  # xAI 2025 Models
+  grok-4:
+    provider: xai
+    context_length: 256000
     supports_functions: true
     supports_vision: true
     supports_streaming: true
     avg_latency_ms: 600
-    cost_per_1k_tokens: 0.001
-    quality_score: 0.88
-    specialties: ["multimodal", "reasoning"]
-    
-  mistral-medium:
-    provider: mistral
-    context_length: 32000
+    cost_per_1m_tokens: 15.00
+    quality_score: 0.95
+    specialties: ["reasoning", "real-time", "creative", "web-search"]
+
+  grok-4-heavy:
+    provider: xai
+    context_length: 256000
     supports_functions: true
-    supports_vision: false
+    supports_vision: true
     supports_streaming: true
-    avg_latency_ms: 400
-    cost_per_1k_tokens: 0.0027
-    quality_score: 0.85
-    specialties: ["code", "multilingual"]
-    
-  mixtral-8x7b:
-    provider: groq
-    context_length: 32000
-    supports_functions: false
-    supports_vision: false
-    supports_streaming: true
-    avg_latency_ms: 200
-    cost_per_1k_tokens: 0.0005
-    quality_score: 0.82
-    specialties: ["fast-inference", "code"]
+    avg_latency_ms: 1000
+    cost_per_1m_tokens: 25.00
+    quality_score: 0.98
+    specialties: ["reasoning", "complex-tasks", "real-time", "premium"]

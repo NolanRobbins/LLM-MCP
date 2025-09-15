@@ -191,13 +191,14 @@ class MetricsCollector:
                 pb["total_cost"] += metric["cost"]
         
         # Calculate averages
-        for provider_data in provider_breakdown.values():
+        for prov_name, provider_data in provider_breakdown.items():
             if provider_data["successes"] > 0:
                 provider_latencies = [
                     m["latency_ms"] for m in filtered
-                    if m["provider"] == provider and m["success"]
+                    if m["provider"] == prov_name and m["success"]
                 ]
-                provider_data["avg_latency"] = statistics.mean(provider_latencies)
+                if provider_latencies:
+                    provider_data["avg_latency"] = statistics.mean(provider_latencies)
         
         # Cache statistics
         cache_total = self.cache_hits + self.cache_misses

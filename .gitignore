@@ -84,3 +84,16 @@ yarn-error.log
 
 # .inter data files (too large for git)
 *.inter
+
+# API Keys and Secrets (extra safety)
+*api_key*
+*secret*
+*token*
+*private_key*
+set_env_production.sh
+.env.production
+.env.staging
+
+# Google Cloud specific
+gcloud_key.json
+service_account.json
