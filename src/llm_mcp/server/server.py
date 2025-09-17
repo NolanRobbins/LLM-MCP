@@ -14,11 +14,11 @@ from fastmcp import FastMCP
 from pydantic import BaseModel, Field
 
 # Import gateway modules
-from gateway.router import IntelligentRouter
-from gateway.cache import SemanticCache
-from gateway.rate_limiter import AdaptiveRateLimiter
-from gateway.cost_tracker import CostOptimizer
-from gateway.metrics import MetricsCollector
+from ..gateway.router import IntelligentRouter
+from ..gateway.cache import SemanticCache
+from ..gateway.rate_limiter import AdaptiveRateLimiter
+from ..gateway.cost_tracker import CostOptimizer
+from ..gateway.metrics import MetricsCollector
 
 # Initialize logging
 logging.basicConfig(

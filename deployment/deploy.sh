@@ -2,7 +2,7 @@
 set -e
 
 # Load environment variables
-source set_env.sh
+source ../setup/set_env.sh
 
 # Colors for output
 RED='\033[0;31m'

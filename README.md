@@ -58,23 +58,28 @@ Businesses want to use the latest AI models but face challenges:
 ### 1. **Clone & Setup**
 
 ```bash
-git clone https://github.com/yourusername/ai-gateway-mcp-server.git
-cd ai-gateway-mcp-server
+git clone https://github.com/NolanRobbins/LLM-MCP.git
+cd LLM-MCP
 
-# Install dependencies
+# Install dependencies using Makefile
+make install
+
+# Or manually:
 pip install uv
 uv venv
 source .venv/bin/activate  # Linux/Mac
 # .venv\Scripts\activate     # Windows
-uv pip install -r requirements.txt
+uv pip install -e ".[dev]"
 ```
 
 ### 2. **Configure Environment**
 
 ```bash
-# Copy environment template
-cp .env.example .env
+# Load environment variables (edit setup/set_env.sh first)
+source setup/set_env.sh
 
+# Or copy environment template for local development
+cp .env.example .env
 # Edit .env with your API keys
 nano .env
 ```
@@ -89,22 +94,34 @@ Required API keys:
 
 ```bash
 # Start the MCP server
-python server.py
+python main.py
+# Or using Makefile
+make run
 
 # Test in another terminal
-python test_server.py
+python scripts/test_server.py
+
+# Run tests
+make test
 ```
 
 ### 4. **Deploy to Google Cloud**
 
 ```bash
-# Setup Google Cloud project
-gcloud config set project YOUR_PROJECT_ID
+# First-time setup (creates project, enables APIs)
+make setup
 
-# Update deployment configuration
-nano set_env.sh  # Set your project details
+# Or manually:
+cd setup/
+./setup_gcp.sh
+./create_project.sh
+source set_env.sh  # Edit this file first with your details
+./enable_apis.sh
 
-# Deploy
+# Deploy to Cloud Run
+make deploy
+# Or manually:
+cd deployment/
 ./deploy.sh
 ```
 
@@ -161,7 +178,7 @@ Add to your MCP client configuration:
   "servers": {
     "ai-gateway": {
       "command": "python",
-      "args": ["path/to/server.py"]
+      "args": ["path/to/main.py"]
     }
   }
 }
@@ -189,12 +206,28 @@ Client Apps → AI Gateway MCP Server → Provider APIs
       [OpenAI]  [Anthropic] [Google] [xAI]
 ```
 
+**Project Structure:**
+```
+LLM-MCP/
+├── src/llm_mcp/           # Main application
+│   ├── gateway/           # Core gateway components
+│   ├── agents/            # AI agents
+│   ├── server/            # MCP server
+│   └── utils/             # Utilities
+├── setup/                 # Environment & GCP setup
+├── deployment/            # Deployment scripts
+├── scripts/               # Test & demo scripts
+├── config/                # Configuration files
+├── tests/                 # Test suite
+└── main.py               # Entry point
+```
+
 **Core Components:**
-- **Router** (`gateway/router.py`) - Intelligent model selection
-- **Cache** (`gateway/cache.py`) - Semantic similarity caching
-- **Rate Limiter** (`gateway/rate_limiter.py`) - Adaptive throttling
-- **Cost Tracker** (`gateway/cost_tracker.py`) - Real-time cost monitoring
-- **Metrics** (`gateway/metrics.py`) - Performance analytics
+- **Router** (`src/llm_mcp/gateway/router.py`) - Intelligent model selection
+- **Cache** (`src/llm_mcp/gateway/cache.py`) - Semantic similarity caching
+- **Rate Limiter** (`src/llm_mcp/gateway/rate_limiter.py`) - Adaptive throttling
+- **Cost Tracker** (`src/llm_mcp/gateway/cost_tracker.py`) - Real-time cost monitoring
+- **Metrics** (`src/llm_mcp/gateway/metrics.py`) - Performance analytics
 
 ## 🔧 Configuration
 
@@ -215,6 +248,33 @@ Edit `config/models.yaml` to:
 - Update pricing
 - Modify capabilities
 - Adjust scoring weights
+
+## 🛠️ Development Commands
+
+The project includes a comprehensive Makefile for easy development:
+
+```bash
+# Setup and Installation
+make install          # Install package and dependencies
+make dev             # Install in development mode
+
+# Development
+make run             # Run the server
+make run-dev         # Run with development dependencies
+
+# Code Quality
+make test            # Run test suite with coverage
+make lint            # Run type checking and linting
+make format          # Format code with black and ruff
+make clean           # Clean cache and build artifacts
+
+# Deployment
+make setup           # Setup GCP environment (first time)
+make deploy          # Deploy to Google Cloud Run
+
+# Environment
+make env             # Show environment setup command
+```
 
 ## 📊 Performance
 
@@ -237,13 +297,18 @@ Edit `config/models.yaml` to:
 
 ```bash
 # Unit tests
+make test
+# Or manually:
 pytest tests/
 
 # Load testing
-python load_test.py --requests=100
+python scripts/load_test.py --requests=100
 
 # Integration testing
-python test_server.py
+python scripts/test_server.py
+
+# Simple test
+python scripts/simple_test.py
 
 # Health check
 curl http://localhost:8080/health
@@ -253,7 +318,14 @@ curl http://localhost:8080/health
 
 ### **Google Cloud Run** (Recommended)
 ```bash
-./deploy.sh  # Automated deployment
+# First time setup
+make setup
+
+# Deploy
+make deploy
+# Or manually:
+cd deployment/
+./deploy.sh
 ```
 
 ### **Docker**
@@ -264,7 +336,14 @@ docker run -p 8080:8080 ai-gateway
 
 ### **Local Development**
 ```bash
-python server.py  # Runs on localhost:8080
+# Using entry point
+python main.py
+
+# Using Makefile
+make run
+
+# Development mode with auto-reload
+make run-dev
 ```
 
 ## 🔐 Security

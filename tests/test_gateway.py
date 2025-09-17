@@ -4,11 +4,11 @@ Unit tests for AI Gateway components
 import pytest
 import asyncio
 from unittest.mock import Mock, patch
-from gateway.router import IntelligentRouter, ModelCapabilities
-from gateway.cost_tracker import CostOptimizer
-from gateway.metrics import MetricsCollector
-from gateway.cache import SemanticCache
-from gateway.rate_limiter import AdaptiveRateLimiter
+from src.llm_mcp.gateway.router import IntelligentRouter, ModelCapabilities
+from src.llm_mcp.gateway.cost_tracker import CostOptimizer
+from src.llm_mcp.gateway.metrics import MetricsCollector
+from src.llm_mcp.gateway.cache import SemanticCache
+from src.llm_mcp.gateway.rate_limiter import AdaptiveRateLimiter
 
 class TestIntelligentRouter:
     """Test cases for IntelligentRouter"""
