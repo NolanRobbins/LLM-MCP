@@ -82,11 +82,10 @@ Response to User
 
 The gateway supports multiple AI providers:
 
-- **OpenAI**: GPT-4, GPT-3.5, GPT-4 Vision
-- **Anthropic**: Claude-3 Opus, Sonnet, Haiku
-- **Google**: Gemini Pro, Gemini Pro Vision
-- **Mistral**: Medium, Small, Large models
-- **Groq**: Mixtral, Llama2, Code Llama
+- **OpenAI**: GPT-5, o3, o4-mini
+- **Anthropic**: Claude-4.1 Opus, Claude-Sonnet-4
+- **Google**: Gemini 2.5 Pro, Gemini 2.5 Flash
+- **xAI**: Grok-4, Grok-4 Heavy
 
 ## Caching Strategy
 
